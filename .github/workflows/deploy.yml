@@ -12,7 +12,8 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - run: docker login ghcr.io -u $GITHUB_ACTOR -p ${{ secrets.TOKEN }}
-      - run: docker build -t ghcr.io/$GITHUB_ACTOR/4psyclub:latest -t ghcr.io/$GITHUB_ACTOR/4psyclub:$GITHUB_SHA .
+      - run: docker pull ghcr.io/$GITHUB_ACTOR/4psyclub:latest || true
+      - run: docker build -t ghcr.io/$GITHUB_ACTOR/4psyclub:latest -t ghcr.io/$GITHUB_ACTOR/4psyclub:$GITHUB_SHA --cache-from=ghcr.io/$GITHUB_ACTOR/4psyclub:latest .
       - run: docker image push ghcr.io/$GITHUB_ACTOR/4psyclub:$GITHUB_SHA
       - run: docker image push ghcr.io/$GITHUB_ACTOR/4psyclub:latest
 
