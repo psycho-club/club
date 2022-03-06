@@ -24,7 +24,7 @@ class Tag(models.Model):
         (GROUP_OTHER, "Остальное"),
     ]
 
-    code = models.CharField(primary_key=True, max_length=32, null=False, unique=True)
+    code = models.CharField(primary_key=True, max_length=64, null=False, unique=True)
     group = models.CharField(max_length=32, choices=GROUPS, default=GROUP_OTHER, null=False)
     name = models.CharField(max_length=64, null=False)
 
