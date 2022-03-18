@@ -35,48 +35,73 @@
 
             <ul class="feed-sidebar-list feed-sidebar-menu feed-sidebar-menu-small">
                 <li>
-                    <a href="{% url "feed_type" "post" %}" class="{% if post_type == "post" %}feed-sidebar-menu-selected{% endif %}">
-                        📝 Посты
+                    <a href="{% url "feed_label" "verified" %}" class="{% if label_code == "verified" %}feed-sidebar-menu-selected{% endif %}">
+                        📝 Посты психологов
                     </a>
                 </li>
                 <li>
-                    <a href="{% url "feed_label" "ama" %}" class="{% if label_code == "ama" %}feed-sidebar-menu-selected{% endif %}">
-                        ✋ AMA
+                    <a href="{% url "feed_label" "question_to_psychologist" %}" class="{% if label_code == "question_to_psychologist" %}feed-sidebar-menu-selected{% endif %}">
+                        ✋ Вопросы психологам
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url "feed_label" "article" %}" class="{% if label_code == "article" %}feed-sidebar-menu-selected{% endif %}">
+                        🗺 Статьи по психологии
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url "feed_label" "history" %}" class="{% if label_code == "history" %}feed-sidebar-menu-selected{% endif %}">
+                        🏗 Психологи прошлого
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url "feed_type" "battle" %}" class="{% if post_type == "battle" %}feed-sidebar-menu-selected{% endif %}">
+                        ⚔ ️Мнение
                     </a>
                 </li>
                 <li>
                     <a href="{% url "feed_label" "inside" %}" class="{% if label_code == "inside" %}feed-sidebar-menu-selected{% endif %}">
-                        💎️ Инсайды
+                        💎️ Полезное
                     </a>
                 </li>
                 <li>
                     <a href="{% url "feed_type" "thread" %}" class="{% if post_type == "thread" %}feed-sidebar-menu-selected{% endif %}">
-                        🗄 Треды
+                        🗄 Подборки
                     </a>
                 </li>
                 <li>
-                    <a href="{% url "feed_type" "guide" %}" class="{% if post_type == "guide" %}feed-sidebar-menu-selected{% endif %}">
-                        🗺 Путеводители
+                    <a href="{% url "feed_label" "question" %}" class="{% if label_code == "question" %}feed-sidebar-menu-selected{% endif %}">
+                        🤔 Вопросы о жизни
                     </a>
                 </li>
                 <li>
-                    <a href="{% url "feed_type" "question" %}" class="{% if post_type == "question" %}feed-sidebar-menu-selected{% endif %}">
-                        🤔 Вопросы
+                    <a href="{% url "feed_type" "idea" %}" class="{% if post_type == "idea" %}feed-sidebar-menu-selected{% endif %}">
+                        💡 Идеи
                     </a>
                 </li>
                 <li>
-                    <a href="{% url "feed_type" "link" %}" class="{% if post_type == "link" %}feed-sidebar-menu-selected{% endif %}">
-                        🔗 Ссылки
-                    </a>
-                </li>
-                <li>
-                    <a href="{% url "feed_type" "project" %}" class="{% if post_type == "project" %}feed-sidebar-menu-selected{% endif %}">
-                        🏗 Проекты
+                    <a href="{% url "feed_label" "service" %}" class="{% if label_code == "service" %}feed-sidebar-menu-selected{% endif %}">
+                        🛠 Сервисы Клуба
                     </a>
                 </li>
                 <li>
                     <a href="{% url "feed_label" "approved" %}" class="{% if label_code == "approved" %}feed-sidebar-menu-selected{% endif %}">
-                        👍 Офигенно
+                        👍 Лучшее
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url "feed_type" "event" %}" class="{% if post_type == "event" %}feed-sidebar-menu-selected{% endif %}">
+                        📅 События
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url "feed_label" "contest" %}" class="{% if label_code == "contest" %}feed-sidebar-menu-selected{% endif %}">
+                        🎁️ Конкурсы
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url "feed_type" "live" %}" class="{% if post_type == "live" %}feed-sidebar-menu-selected{% endif %}">
+                        ✍️ Дневники
                     </a>
                 </li>
             </ul>
