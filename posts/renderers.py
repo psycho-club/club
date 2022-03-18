@@ -35,7 +35,11 @@ def render_post(request, post, context=None):
         muted_user_ids = []
 
     # order comments
-    comment_order = request.GET.get("comment_order") or "-upvotes"
+    if post.type == Post.TYPE_LIVE:
+        comment_order = request.GET.get("comment_order") or "-created_at"
+    else:
+        comment_order = request.GET.get("comment_order") or "-upvotes"
+
     if comment_order in POSSIBLE_COMMENT_ORDERS:
         comments = comments.order_by(comment_order, "created_at")  # additionally sort by time to preserve an order
 

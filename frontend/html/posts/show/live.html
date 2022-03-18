@@ -1,0 +1,127 @@
+{% extends "posts/show/layout.html" %}
+{% load static %}
+{% load posts %}
+{% load text_filters %}
+
+
+{% block post %}
+<section class="content">
+    <article class="post block post-layout-block">
+        {% block post_upvote %}
+            <div class="post-upvote">
+                <post-upvote :initial-upvotes="{{ post.upvotes }}"
+                             :hours-to-retract-vote="{{settings.RETRACT_VOTE_IN_HOURS}}"
+                             upvote-url="{% url "upvote_post" post.slug %}"
+                             retract-vote-url="{% url "retract_post_vote" post.slug %}"
+                             {% if is_voted %}
+                                initial-is-voted
+                                initial-upvote-timestamp={{upvoted_at}}
+                             {% endif %}
+                             {% if not me|can_upvote:post or upvote_disabled %}is-disabled{% endif %}>
+                </post-upvote>
+            </div>
+        {% endblock %}
+
+        {% block post_header %}
+            <header class="post-header">
+                <div class="post-title">
+                    {% block post_title %}
+                        <h1 class="post-inline-title p-name">✍ ️Live: {{ post.title | rutypography }}</h1>
+                    {% endblock %}
+
+                    <span class="post-is-public">
+                        {% if post.is_public %}
+                            <i class="fas fa-globe-americas"></i>&nbsp;Публичный пост
+                        {% else %}
+                            <i class="fas fa-lock"></i>&nbsp;Только для своих
+                        {% endif %}
+                    </span>
+
+                    {% if post.label %}
+                        {% include "posts/widgets/label.html" with label=post.label %}
+                    {% endif %}
+
+                    {% if post.deleted_at %}
+                        <div class="post-label">
+                            <span class="label label-type-deleted">
+                                <span class="label-title">Удалённый пост</span>
+                            </span>
+                        </div>
+                    {% elif not post.is_visible %}
+                        <div class="post-label">
+                            {% include "posts/widgets/draft_label.html" %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="post-info">
+                    {% if post.topic %}
+                        {% include "posts/widgets/topic.html" with topic=post.topic type="inline" %}
+                    {% endif %}
+                    <div class="post-actions-line">
+                        {% include "posts/widgets/post_actions_line.html" %}
+                    </div>
+                </div>
+
+                {% if post.metadata.badges %}
+                    <a class="post-badges" href="{% url "profile_badges" post.author.slug %}">
+                        {% include "badges/widgets/badges.html" with badges=post.metadata.badges %}
+                    </a>
+                {% endif %}
+            </header>
+        {% endblock %}
+
+        {% block post_text %}
+            <section class="text-body text-body-type-post e-content">
+                {% render_post post %}
+            </section>
+        {% endblock %}
+
+        {% block post_footer %}
+            <footer class="post-footer p-author">
+                {% include "users/widgets/small.html" with user=post.author created_at=post.created_at %}
+            </footer>
+        {% endblock %}
+    </article>
+</section>
+{% endblock %}
+
+{% block comments %}
+    <div class="post-comments" id="comments">
+
+        {% if me.id == post.author.id %}
+            <post-subscription
+                url="{% url "toggle_post_subscription" post.slug %}"
+                {% if subscription %}is-active-by-default{% endif %}
+                class="post-comments-subscription"
+            >
+            подписка на комментарии
+            </post-subscription>
+        {% endif %}
+
+        {% if not post.comment_count and post.is_commentable and post.is_visible and me.id == post.author.id %}
+            <div class="post-comments-title">
+                <a href="#comments" class="post-comments-count">
+                    Напиши первый коммент 👇
+                </a>
+            </div>
+        {% endif %}
+        {% if me.id == post.author_id %}
+            <div class="post-comments-form">
+                {% include "comments/forms/comment.html" with post=post form=comment_form %}
+            </div>
+        {% else %}
+            <div class="content-description content-description-left">
+                <p><strong>В данном разделе можно размещать ответы только под комментариями автора топика.
+                    Даже модераторы тут бессильны.</strong></p>
+                <p><strong>Это Live раздел, детка, тут - царство деспотизма и произвола топикстартера🤷‍</strong></p>
+            </div>
+        {% endif %}
+        {% if comments %}
+            <div class="post-comments-list">
+                {% include "comments/list.html" with comments=comments reply_form=reply_form type="live" %}
+            </div>
+        {% endif %}
+    </div>
+
+{% endblock %}
