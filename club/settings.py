@@ -228,7 +228,7 @@ JWT_ALGORITHM = "RS256"
 MEDIA_UPLOAD_URL = "https://i.4psy.club/upload/multipart/"
 MEDIA_UPLOAD_CODE = os.getenv("MEDIA_UPLOAD_CODE")
 VIDEO_EXTENSIONS = {"mp4", "mov", "webm"}
-IMAGE_EXTENSIONS = {"jpg", "jpeg", "png", "gif"}
+IMAGE_EXTENSIONS = {"jpg", "jpe", "jpeg", "png", "gif"}
 
 OG_IMAGE_GENERATOR_URL = "https://og.4psy.club/preview"
 OG_IMAGE_DEFAULT = "https://4psy.club/static/images/share.png"
