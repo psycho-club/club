@@ -32,7 +32,7 @@ class Post(models.Model, ModelDiffMixin):
     TYPE_THREAD = "thread"
     TYPE_LIVE = "live"
     TYPES = [
-        (TYPE_POST, "Текст"),
+        (TYPE_POST, "Пост"),
         (TYPE_INTRO, "#intro"),
         (TYPE_LINK, "Ссылка"),
         (TYPE_QUESTION, "Вопрос"),
@@ -40,11 +40,11 @@ class Post(models.Model, ModelDiffMixin):
         (TYPE_PROJECT, "Проект"),
         (TYPE_EVENT, "Событие"),
         (TYPE_REFERRAL, "Рефералка"),
-        (TYPE_BATTLE, "Батл"),
+        (TYPE_BATTLE, "Мнение"),
         (TYPE_WEEKLY_DIGEST, "Журнал Клуба"),
         (TYPE_GUIDE, "Путеводитель"),
-        (TYPE_THREAD, "Тред"),
-        (TYPE_LIVE, "Live"),
+        (TYPE_THREAD, "Опрос"),
+        (TYPE_LIVE, "Дневник"),
     ]
 
     TYPE_TO_EMOJI = {
