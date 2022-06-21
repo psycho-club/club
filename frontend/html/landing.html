@@ -16,8 +16,11 @@
     {% endblock %}
     {% include "common/favicon.html" %}
     {% render_bundle "main" "css" %}
+
+    <meta name="telderi" content="cf6887bf32d312cfbdc0d9183a382b28" />
 </head>
 <body>
+{% include "counter.html" %}
 
 {% block body %}
     <main class="landing">
